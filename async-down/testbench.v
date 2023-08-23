@@ -1,11 +1,11 @@
-// `timescale 1ns / 1ps
+`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10.08.2023 16:40:39
+// Create Date: 17.08.2023 16:27:18
 // Design Name: 
-// Module Name: updowncounter
+// Module Name: testbench
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module updown_counter(clock,count,reset,ud);
- output reg[3:0]count;
- input clock,reset,ud;
- always @ (posedge clock) begin
-  if (reset)
-   count<=4'b0;
-   else begin
-    if(ud)
-     count<=count+1;
-  else 
-    count<=count-1;
-    end
- end
+module testbench();
+    reg clock,reset;
+     wire[3:0] counter;
+     async_down c1(counter,clock,reset);
+     always
+      #5 clock=~clock;
+      initial
+       begin 
+        clock=0;
+        reset=1;
+        #10 reset=0;
+        #40 reset=1;
+        #10 reset =0;
+        end
 endmodule
+ 

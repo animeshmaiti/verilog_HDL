@@ -25,7 +25,9 @@ wire[3:0]count;
 reg clock,reset;
 upcounter c0(clock,count,reset);
 initial
- begin 
+ begin
+  $dumpfile("simulation.vcd");
+  $dumpvars(0, upcounter_test); 
  clock = 0;
  reset =1;
  #20 reset=0;
