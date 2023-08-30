@@ -8,7 +8,7 @@ module up_counter (
         if (reset)
             count <= 4'b0000;
         else
-            count <= count + 1;
+            count <= count - 1;
     end
 
 endmodule
